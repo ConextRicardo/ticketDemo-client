@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthUser } from "../hooks/useAuthUser";
+import {
+  StyledAuth,
+  StyledAuthButton,
+  StyledAuthForm,
+  StyledAuthInput,
+} from "./AuthStyles.styles";
 
 const Auth = ({ status, signInHandler }) => {
   const [error, setError] = useState("");
@@ -8,12 +14,11 @@ const Auth = ({ status, signInHandler }) => {
   const passRef = useRef();
   const navigate = useNavigate();
   const { login } = useAuthUser();
-
   useEffect(() => {
     if (status) {
       navigate("/", { replace: true });
     }
-  }, []);
+  }, [status, navigate]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -21,7 +26,7 @@ const Auth = ({ status, signInHandler }) => {
     const pass = passRef.current.value;
     const result = await login(email, pass);
     if (result.code === 406) {
-      setError("Cannot Sign In");
+      setError("Usuario y contraseña no existen");
       return;
     } else {
       setError("");
@@ -31,21 +36,21 @@ const Auth = ({ status, signInHandler }) => {
   };
 
   return (
-    <div>
-      <h1>Auth</h1>
-      <form onSubmit={submitHandler}>
-        <input placeholder="email" type="email" ref={emailRef} />
-        <input
+    <StyledAuth>
+      {error !== "" && <div>{error}</div>}
+      <StyledAuthForm onSubmit={submitHandler}>
+        <h1>INICIAR SESION</h1>
+        <StyledAuthInput placeholder="email" type="email" ref={emailRef} />
+        <StyledAuthInput
           current-password="true"
           autoComplete="true"
           placeholder="password"
           type="password"
           ref={passRef}
         />
-        <button>login</button>
-      </form>
-      {error !== "" && <div>{error}</div>}
-    </div>
+        <StyledAuthButton>login</StyledAuthButton>
+      </StyledAuthForm>
+    </StyledAuth>
   );
 };
 
