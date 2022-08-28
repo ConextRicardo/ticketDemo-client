@@ -13,13 +13,14 @@ export const StyledAuth = styled.div`
 
 export const StyledAuthForm = styled.form`
   border-radius: 10px;
-  height: 50%;
+  height: 70%;
   width: min(60%, 25rem);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-primary);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: var(--conext-secondary);
 `;
 
 export const StyledAuthInput = styled.input`
@@ -32,7 +33,7 @@ export const StyledAuthInput = styled.input`
   transition: all 125ms;
 
   &:focus {
-    border: 1px solid #ff2345;
+    border: 1px solid var(--conext-primary);
   }
 `;
 
@@ -47,7 +48,19 @@ export const StyledAuthButton = styled.button`
   font-weight: 600;
 
   &:hover {
-    background-color: #ff2345;
+    background-color: var(--conext-primary);
     color: white;
   }
+`;
+export const AuthErrorContainer = styled.div`
+  width: min(60%, 22rem);
+  margin: 15px;
+  padding: 25px;
+  border-radius: 10px;
+  background-color: var(--conext-secondary);
+  color: var(--conext-primary);
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

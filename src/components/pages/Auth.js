@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthUser } from "../hooks/useAuthUser";
 import {
+  AuthErrorContainer,
   StyledAuth,
   StyledAuthButton,
   StyledAuthForm,
   StyledAuthInput,
-} from "./AuthStyles.styles";
+} from "./AuthStyles";
 
 const Auth = ({ status, signInHandler }) => {
   const [error, setError] = useState("");
@@ -16,7 +17,7 @@ const Auth = ({ status, signInHandler }) => {
   const { login } = useAuthUser();
   useEffect(() => {
     if (status) {
-      navigate("/", { replace: true });
+      navigate("/history", { replace: true });
     }
   }, [status, navigate]);
 
@@ -31,13 +32,13 @@ const Auth = ({ status, signInHandler }) => {
     } else {
       setError("");
       signInHandler();
-      navigate("/", { replace: true });
+      navigate("/history", { replace: true });
     }
   };
 
   return (
     <StyledAuth>
-      {error !== "" && <div>{error}</div>}
+      {error !== "" && <AuthErrorContainer>{error}</AuthErrorContainer>}
       <StyledAuthForm onSubmit={submitHandler}>
         <h1>INICIAR SESION</h1>
         <StyledAuthInput placeholder="email" type="email" ref={emailRef} />
