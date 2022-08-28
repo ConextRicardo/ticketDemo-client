@@ -19,7 +19,6 @@ const History = ({ showModalHandler }) => {
     const getData = async () => {
       const data = await getHistoricalData();
       setHistData(data);
-      console.log(data);
     };
     getData();
   }, []);

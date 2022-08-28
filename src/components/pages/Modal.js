@@ -29,9 +29,7 @@ const Modal = ({ showModalHandler }) => {
   }, []);
 
   const updateApproval = async (dep, ticketId) => {
-    const data = await updateFault(dep, ticketId);
-    console.log(data);
-    return data;
+    await updateFault(dep, ticketId);
   };
 
   const stPermission =
